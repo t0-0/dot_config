@@ -28,4 +28,13 @@ plugins = require("plugins_nvim-autopairs").setup(plugins)
 -- catpuccin
 plugins = require("plugins_colorscheme").setup(plugins)
 
+-- toggleterm
+plugins = require("plugins_toggleterm").setup(plugins)
+
+-- complement
+plugins = require("plugins_complement").setup(plugins)
+
+-- nvim-lsp
+plugins = require("plugins_nvim_lsp").setup(plugins)
+
 require("lazy").setup(plugins, opts)
