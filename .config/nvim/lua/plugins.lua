@@ -37,4 +37,7 @@ plugins = require("plugins_complement").setup(plugins)
 -- nvim-lsp
 plugins = require("plugins_nvim_lsp").setup(plugins)
 
+-- barbar
+plugins = require("plugins_barbar").setup(plugins)
+
 require("lazy").setup(plugins, opts)

@@ -13,11 +13,15 @@ vim.opt.hidden = true
 vim.opt.termguicolors = true
 vim.opt.updatetime = 250
 vim.opt.laststatus = 3 -- https://wed.dev/blog/posts/neovim-statuline
-  
+
+vim.g.mapleader = " "
+vim.api.nvim_set_keymap("n", "<leader>n", ":bnext<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>p", ":bprev<CR>", { noremap = true, silent = true })
+
 if not vim.g.vscode then
   vim.api.nvim_set_keymap('t', '<ESC>', '<C-\\><C-n>', { noremap = true })
 
--- Plugins
+  -- Plugins
   require('plugins') -- プラグインの読み込み
 end
 
@@ -28,7 +32,7 @@ if require('util').OSX() then
     pattern = { "*" },
     callback = function() vim.fn.system('im-select com.apple.inputmethod.Kotoeri.RomajiTyping.Roman') end,
   })
--- Linuxのとき
+  -- Linuxのとき
 else
   -- For IME
   vim.api.nvim_create_autocmd({ "InsertLeave" }, {
