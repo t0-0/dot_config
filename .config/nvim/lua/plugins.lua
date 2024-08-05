@@ -40,4 +40,7 @@ plugins = require("plugins_nvim_lsp").setup(plugins)
 -- barbar
 plugins = require("plugins_barbar").setup(plugins)
 
+-- neo_tree
+plugins = require("plugins_neo_tree").setup(plugins)
+
 require("lazy").setup(plugins, opts)
