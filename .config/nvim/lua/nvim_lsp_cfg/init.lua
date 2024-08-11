@@ -12,7 +12,7 @@ local on_attach = function(client, bufnr)
 
   -- Mappings.
   -- See `:help vim.lsp.*` for documentation on any of the below functions
-  local bufopts = { noremap=true, silent=true, buffer=bufnr }
+  local bufopts = { noremap = true, silent = true, buffer = bufnr }
   vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
   vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
   vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
@@ -26,9 +26,9 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, bufopts)
   vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
   vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
-  vim.keymap.set('n', '<leader>cd', function() vim.diagnostic.open_float({scope="line"}) end, bufopts)
+  vim.keymap.set('n', '<leader>cd', function() vim.diagnostic.open_float({ scope = "line" }) end, bufopts)
   vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
-  vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format { sync = false, timeout_ms=20000  } end, bufopts)
+  vim.keymap.set('n', 'gf', function() vim.lsp.buf.format { sync = false, timeout_ms = 20000 } end, bufopts)
 
   -- ref https://zenn.dev/link/comments/fd67dab010b7d5
   -- ref https://github.com/haskell/haskell-language-server/issues/1148#issuecomment-887858195
@@ -61,25 +61,25 @@ require('mason-lspconfig').setup_handlers {
 
     if server_name == 'efm' then
       setting = {
-          init_options = {documentFormatting = true},
-          settings = {
-              rootMarkers = {".git/"},
-              languages = {
-                  lua = {
-                      {formatCommand = "lua-format -i", formatStdin = true}
-                  },
-                  python = {
-                    {formatCommand = "black", formatStdin = true}
-                  }
-              },
-              commands = {
-                -- 何故かconfig.yamlを読まない？のでこちらを追加
-                command = "efm-langserver",
-                arguments = { "-c", "~/.config/efm-langserver/config.yaml" } -- TODO: Windows用の設定
-              }
+        init_options = { documentFormatting = true },
+        settings = {
+          rootMarkers = { ".git/" },
+          languages = {
+            lua = {
+              { formatCommand = "lua-format -i", formatStdin = true }
+            },
+            python = {
+              { formatCommand = "black", formatStdin = true }
+            }
           },
-          capabilities = capabilities,
-          filetypes = { 'python' },
+          commands = {
+            -- 何故かconfig.yamlを読まない？のでこちらを追加
+            command = "efm-langserver",
+            arguments = { "-c", "~/.config/efm-langserver/config.yaml" } -- TODO: Windows用の設定
+          }
+        },
+        capabilities = capabilities,
+        filetypes = { 'python' },
       }
     end
 
@@ -91,19 +91,19 @@ require('mason-lspconfig').setup_handlers {
         "--pch-storage=memory",
         "--clang-tidy"
       }
-      setting.filetypes =  { 'c', 'cpp', 'objc', 'objcpp', 'cuda', 'cl' }
+      setting.filetypes = { 'c', 'cpp', 'objc', 'objcpp', 'cuda', 'cl' }
       setting.root_dir = function(fname)
         return lspconfig_util.root_pattern('compile_commands.json', '.cache', 'compile_flags.txt')(fname)
-          or lspconfig_util.path.dirname(fname)
+            or lspconfig_util.path.dirname(fname)
       end
     end
 
-    lspconfig[server_name].setup (setting)
+    lspconfig[server_name].setup(setting)
   end,
 }
 
 -- format on save
 vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
-  pattern = {"*"},
-  callback = function() vim.lsp.buf.format { sync = false, timeout_ms=20000 } end,
+  pattern = { "*" },
+  callback = function() vim.lsp.buf.format { sync = false, timeout_ms = 20000 } end,
 })
