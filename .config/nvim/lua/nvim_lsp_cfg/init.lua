@@ -29,6 +29,7 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', '<leader>cd', function() vim.diagnostic.open_float({ scope = "line" }) end, bufopts)
   vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
   vim.keymap.set('n', 'gf', function() vim.lsp.buf.format { sync = false, timeout_ms = 20000 } end, bufopts)
+  vim.keymap.set("n", "ge", "<cmd>lua vim.diagnostic.open_float()<CR>")
 
   -- ref https://zenn.dev/link/comments/fd67dab010b7d5
   -- ref https://github.com/haskell/haskell-language-server/issues/1148#issuecomment-887858195

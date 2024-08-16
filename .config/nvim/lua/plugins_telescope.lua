@@ -12,6 +12,7 @@ telescope.setup = function(plugins)
       vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
       vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
       vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
+      vim.keymap.set("n", "<leader>fd", builtin.diagnostics, {})
       require("telescope").setup({
         defaults = {
           mappings = {
@@ -22,7 +23,6 @@ telescope.setup = function(plugins)
             n = {
               ["<C-k>"] = require("telescope.actions").move_selection_previous,
               ["<C-j>"] = require("telescope.actions").move_selection_next,
-              ["jj"] = require("telescope.actions").close,
             },
           },
         },

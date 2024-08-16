@@ -46,4 +46,10 @@ plugins = require("plugins_neo_tree").setup(plugins)
 -- telescope
 plugins = require("plugins_telescope").setup(plugins)
 
+-- treesitter
+plugins = require("plugins_treesitter").setup(plugins)
+
+-- lualine
+plugins = require("plugins_lualine").setup(plugins)
+
 require("lazy").setup(plugins, opts)
