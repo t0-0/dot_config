@@ -30,6 +30,13 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
   vim.keymap.set('n', 'gf', function() vim.lsp.buf.format { sync = false, timeout_ms = 20000 } end, bufopts)
   vim.keymap.set("n", "ge", "<cmd>lua vim.diagnostic.open_float()<CR>")
+  vim.keymap.set("n", "gp", "<cmd>lua FormatWithPrettier()<CR>", { noremap = true, silent = true })
+  function FormatWithPrettier()
+    local filename = vim.fn.expand('%:p')
+    local cmd = string.format('prettier --write "%s"', filename)
+    vim.fn.system(cmd)
+    vim.cmd('e!')
+  end
 
   -- ref https://zenn.dev/link/comments/fd67dab010b7d5
   -- ref https://github.com/haskell/haskell-language-server/issues/1148#issuecomment-887858195
